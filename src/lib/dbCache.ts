@@ -5,6 +5,6 @@ export function getGlobalTag(tag: CacheTag) {
 export function getUserTag(tag: CacheTag, userid: string) {
   return `user:${userid}:${tag}` as const;
 }
-export function getId(tag: CacheTag, id: string) {
+export function getIdTag(tag: CacheTag, id: string) {
   return `id:${id}:${tag}` as const;
 }
