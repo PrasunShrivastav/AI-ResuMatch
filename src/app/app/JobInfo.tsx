@@ -1,10 +1,14 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { db } from "@/drizzle/db";
 import { jobInfoTable } from "@/drizzle/schema";
+import JobInfoForm from "@/features/JobInfos/components/JobInfoForm";
 import { getJobInfoUserIdTag } from "@/features/JobInfos/dbCache";
 import { getCurrentUser } from "@/services/clerk/lib/user";
 import { desc, eq } from "drizzle-orm";
+import { PlusIcon } from "lucide-react";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+import Link from "next/link";
 
 export default async function JobInfos() {
   const { userId, redirectToSignIn } = await getCurrentUser();
@@ -19,6 +23,21 @@ export default async function JobInfos() {
   }
   const jobInfos = await getJobInfos(userId);
   if (jobInfos == null) return <NoJobInfos />;
+  return (
+    <div className="container my-4 ">
+      <div className="flex gap-2 justify-between mb-6">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl">
+          Select a job description
+        </h1>
+        <Button asChild>
+          <Link href="/app/job-infos/new">
+            <PlusIcon />
+            Create Job Description
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
   function NoJobInfos() {
     return (
       <div className="container my-4 max-w-5xl text-center">
@@ -35,7 +54,9 @@ export default async function JobInfos() {
           interviews and questions will be will be.
         </p>
         <Card>
-          <CardContent>hi</CardContent>
+          <CardContent>
+            <JobInfoForm />
+          </CardContent>
         </Card>
       </div>
     );
