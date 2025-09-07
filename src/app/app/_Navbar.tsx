@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  BookOpenIcon,
-  FileSlidersIcon,
-  LogOut,
-  SpeechIcon,
-  User,
-  FileUser,
-} from "lucide-react";
+import { LogOut, User, FileUser } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -18,8 +11,8 @@ import {
 import { SignOutButton, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { UserAvatar } from "@/components/UserAvatar";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components/feature/ThemeToggle";
+import { UserAvatar } from "@/components/feature/UserAvatar";
 
 export function Navbar({ user }: { user: { name: string; imageUrl: string } }) {
   const { openUserProfile } = useClerk();

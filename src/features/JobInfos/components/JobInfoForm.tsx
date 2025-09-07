@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSwap } from "@/components/ui/loading-swap";
+import { createJobInfo, updateJobInfo } from "../actions";
 
 type JobInfoFormData = z.infer<typeof JobInfoFormSchema>;
 interface JobInfoFormProps {

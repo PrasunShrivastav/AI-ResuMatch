@@ -14,7 +14,8 @@ export const jobInfoTable = pgTable("job_Info", {
   id,
   createdAt,
   updatedAt,
-  title: varchar("title").notNull(),
+  name: varchar().notNull(),
+  title: varchar("title"),
   experienceLevel: experienceLevelEnum("experience_level").notNull(),
   description: varchar("description").notNull(),
   userId: varchar()
