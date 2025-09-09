@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SignOutButton, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/feature/ThemeToggle";
 import { UserAvatar } from "@/components/feature/UserAvatar";
 

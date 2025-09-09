@@ -1,6 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import JobInfoForm from "@/features/JobInfos/components/JobInfoForm";
 import { JobInfoBackLink } from "@/features/JobInfos/components/JobInfoBackLink";
+import { Suspense } from "react";
+import { Loader2Icon } from "lucide-react";
+import { getCurrentUser } from "@/services/clerk/lib/user";
+import { getJobInfo } from "@/features/JobInfos/getJobInfo";
 
 export default async function JobInfosNewPage({
   params,
@@ -16,9 +20,19 @@ export default async function JobInfosNewPage({
       <JobInfoBackLink jobInfoId={jobInfoId} />
       <Card>
         <CardContent>
-          <JobInfoForm />
+          <Suspense
+            fallback={<Loader2Icon className="size-24 animate-spin mx-auto" />}
+          >
+            <SuspendedForm jobInfoId={jobInfoId} />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
   );
+}
+async function SuspendedForm({ jobInfoId }: { jobInfoId: string }) {
+  const { userId, redirectToSignIn } = await getCurrentUser();
+  if (userId == null) return redirectToSignIn();
+  const jobInfo = await getJobInfo(jobInfoId, userId);
+  return <JobInfoForm jobInfo={jobInfo} />;
 }
